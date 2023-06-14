@@ -2,7 +2,7 @@
 
 ```
 composer require jolimardi/laravel-menu
-php artisan vendor:publish   ->   Sélectionner JoliMardi/Menu
+php artisan vendor:publish --provider=JoliMardi\Menu\MenuServiceProvider
 ```
 Il est recommandé d'installer `blade-ui-kit/blade-icons` pour utiliser les icônes.
 
