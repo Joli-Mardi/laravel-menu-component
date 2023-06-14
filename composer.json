@@ -1,16 +1,13 @@
 {
-    "name": "jolimardi/enu",
+    "name": "jolimardi/menu",
     "description": "Custom Navigation for Laravel",
+    "type": "library",
     "autoload": {
         "psr-4": {
             "JoliMardi\\Menu\\": "src/"
         }
     },
-    "authors": [
-        {
-            "name": "Romain Chérot"
-        }
-    ],
+    "authors": [{ "name": "Romain Chérot" }],
     "require": {
         "symfony/yaml": "^6.3"
     }

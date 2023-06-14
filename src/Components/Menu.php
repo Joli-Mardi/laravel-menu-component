@@ -1,6 +1,7 @@
 <?php
 
-namespace JoliMardi\Menu;
+namespace JoliMardi\Menu\Components;
+// Attention ! Le namespace doit correspondre à l'arborescence des sous-dossiers ! (norme PSR-4)
 
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -166,6 +167,6 @@ class MenuLink extends Component {
 
         $this->classes = implode(' ', $this->classes_array);
 
-        return view('Menu::components.menu-link');
+        return view('menu::components.menu-link');
     }
 }
