@@ -21,6 +21,9 @@ class Menu extends Component {
      */
     public function __construct(private array $menu_array = [], private int $level = 0) {
         if (count($this->menu_array) == 0) {
+            if( ! is_file('../config/menu.yml')){
+                throw new \ErrorException('\JoliMardi\Menu : /config/menu.yml introuvable - Executer "php artisan vendor:publish" et sélectionner le package pour résoudre le problème.');
+            }
             $this->menu_array = Yaml::parseFile('../config/menu.yml');
         }
 
