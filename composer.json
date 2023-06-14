@@ -1,5 +1,5 @@
 {
-    "name": "jolimardi/menu",
+    "name": "jolimardi/laravel-menu",
     "description": "Custom Navigation for Laravel",
     "type": "library",
     "autoload": {
