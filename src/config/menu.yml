@@ -1,0 +1,72 @@
+## Main menu
+---
+
+## la clé doit être unique
+## le param "route:" doit correspondre à une route dans routes.yml
+
+
+#  --  Menu item simple  --
+#
+#  {routename}: {Title}
+#
+#
+#  -- Menu item avec icones et submenu  --
+#
+#  {routename}:
+#      title: {Title}
+#      icon: {icon}   #@svg($icon) -> voir Blade UI Icons
+#      submenu:
+#          {submenu-routename}:
+#              title : {Submenu Title}
+#          {submenu-routename}:
+#              title : {Submenu Title}
+#
+#
+#
+#  -- Liste de sous-routes qui rendent le menu .active --
+#  {routename}:
+#      title: {Title}
+#      active-routes:
+#          - {active-routename}
+#          - {admin.*}
+#
+#
+#  -- Icone --#
+#  {routename}:
+#      title: {Title}
+#      icon: {icon}   #@svg($icon) -> voir Blade UI
+#
+#  -- Lien externe --#
+#  {routename_inutile}:
+#      title: {Title}
+#      href: {url}
+#
+
+
+quisommesnous:
+    title: Qui sommes-nous&nbsp;?
+    active-routes:
+      - home
+
+psys: Nos psychologues
+
+orientation:
+    title: Rendez-vous d'orientation
+
+login:
+    title: Connexion
+    href: 'https://app.cammino.fr'
+
+psy-planning:
+    title: Planning
+    icon: ci-calendar
+
+
+horoscopes:
+  title: Horoscope
+  submenu:
+    today:
+      title: Aujourd'hui
+    tomorrow:
+      title: Demain
+      keep_sign: false
