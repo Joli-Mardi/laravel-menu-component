@@ -2,7 +2,7 @@
     "name": "jolimardi/laravel-menu",
     "description": "Custom Navigation for Laravel",
     "type": "library",
-    "license": "GNU GPLv3",
+    "license": "GPL-3.0",
     "autoload": {
         "psr-4": {
             "JoliMardi\\Menu\\": "src/"
