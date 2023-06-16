@@ -19,10 +19,18 @@ class MenuServiceProvider extends ServiceProvider {
 
 
 
-        $this->publishes([
+        /*$this->publishes([
             __DIR__ . '/config/menu.yml' => config_path('menu.yml'),
             __DIR__ . '/views' => resource_path('views/vendor/menu'),
-        ]);
+        ]);*/
+
+        $this->publishes([
+            __DIR__ . '/config/menu.yml' => config_path('menu.yml')
+        ], 'config');
+
+        $this->publishes([
+            __DIR__ . '/views' => resource_path('views/vendor/menu')
+        ], 'views');
     }
 
 

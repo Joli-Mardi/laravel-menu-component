@@ -11,5 +11,12 @@
     "authors": [{ "name": "Romain Chérot" }],
     "require": {
         "symfony/yaml": "^6.3"
-    }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "JoliMardi\\Menu\\MenuServiceProvider"
+            ]
+        }
+    },
 }
