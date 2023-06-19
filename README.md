@@ -2,8 +2,20 @@
 
 ```
 composer require jolimardi/laravel-menu
-php artisan vendor:publish --provider=JoliMardi\Menu\MenuServiceProvider
 ```
+
+Puis ajouter le provider dans `config/app.php` (à tester, normalement pas nécessaire) :
+```
+'providers' => ServiceProvider::defaultProviders()->merge([
+    ...        
+    JoliMardi\Menu\MenuServiceProvider::class,
+])->toArray(),
+```
+
+```
+php artisan vendor:publish --provider="JoliMardi\Menu\MenuServiceProvider"
+```
+
 Il est recommandé d'installer `blade-ui-kit/blade-icons` pour utiliser les icônes.
 
 
