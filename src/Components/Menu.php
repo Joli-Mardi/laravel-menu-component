@@ -36,7 +36,7 @@ class Menu extends Component {
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string {
-        $html = "<ul class='main-menu level-$this->level'>";
+        $html = "<ul class='menu level-$this->level'>";
         foreach ($this->menu_links as $menu_link) {
             $html .= $menu_link->render()->with($menu_link->data());
         }
