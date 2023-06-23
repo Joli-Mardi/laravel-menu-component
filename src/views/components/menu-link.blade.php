@@ -1,5 +1,5 @@
 <li class="{{ $classes }}">
-    <a href="{{ $href }}">
+    <a href="{{ $href }}" class="{{ $active ? 'is-active' : '' }}">
         @if($has_icon)
         @svg($icon)
         @endif
