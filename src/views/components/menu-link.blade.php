@@ -4,6 +4,9 @@
             @svg($icon)
         @endif
         {!! $title !!}
+        @if (!empty($submenu_html))
+            @svg('coolicon-caret-down-md', 'menu-chevron-down')
+        @endif
     </a>
     {!! $submenu_html !!}
 </li>
