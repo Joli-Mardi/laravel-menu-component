@@ -16,18 +16,33 @@ class Menu extends Component {
 
 
     private array $menu_links = [];
+
     /**
      * Create a new component instance.
      */
-    public function __construct(private array $menu_array = [], private int $level = 0) {
-        if (count($this->menu_array) == 0) {
-            if( ! is_file('../config/menu.yml')){
-                throw new \ErrorException('\JoliMardi\Menu : /config/menu.yml introuvable - Executer "php artisan vendor:publish --provider=JoliMardi\Menu\MenuServiceProvider" pour résoudre le problème.');
+
+
+    // Items OR yaml file (à partir de menu-name)
+    public function __construct(public array $items = [], public string $name = '', public int $level = 0) {
+
+        $menuArray = [];
+
+        // Si on passe des items, on les prends en priorité
+        if (count($items) > 0) {
+            $menuArray = $items;
+
+        // Sinon on tente de charger le yaml
+        } else{
+
+            $yamlFilename = empty($name) ? '../config/menu.yml' : "../config/menu-$name.yml";
+
+            if (!is_file($yamlFilename)) {
+                throw new \ErrorException("\JoliMardi\Menu : $yamlFilename introuvable. Ajouter l'attribut name=\"user\" pour charger /config/menu-user.yaml ou exécuter \"php artisan vendor:publish --provider=JoliMardi\Menu\MenuServiceProvider\" pour ajouter un menu.yaml d'exemple dans le dossier /config/");
             }
-            $this->menu_array = Yaml::parseFile('../config/menu.yml');
+            $menuArray = Yaml::parseFile($yamlFilename);
         }
 
-        foreach ($this->menu_array as $routename => $menu_item_data) {
+        foreach ($menuArray as $routename => $menu_item_data) {
             $this->menu_links[] = self::create_menu_link_form_array($routename, $menu_item_data, $level);
         }
     }
@@ -119,7 +134,10 @@ class Menu extends Component {
 
     public static function get_submenu_html(string $routename, string|array $menu_item_data_array, $current_menu_level = 0): string {
         if (isset($menu_item_data_array['submenu'])) {
-            $submenu = new self($menu_item_data_array['submenu'], $current_menu_level + 1);
+
+            // @TODO : Changer les paramètres pour coller au nouveau construct
+            $submenu = new self($menu_item_data_array['submenu'], '', $current_menu_level + 1);
+
             //return $submenu->render()->with($submenu->data());
 
             /*echo '<pre>';
@@ -135,7 +153,6 @@ class Menu extends Component {
 }
 
 
-
 class MenuLink extends Component {
 
     public bool $has_icon = false;
@@ -149,9 +166,9 @@ class MenuLink extends Component {
     public function __construct(
         public string $href,
         public string $title,
-        public bool $active = false,
-    ) {
-    }
+        public bool   $active = false,
+    ) {}
+
     public function render(): View|Closure|string {
 
         if ($this->active) {
