@@ -62,6 +62,10 @@ class Menu extends Component {
 
     public static function create_menu_link_form_array(string $routename, string|array $menu_item_data_array, int $level = 0): MenuLink {
 
+        if(isset($menu_item_data_array['callback']) && is_callable($menu_item_data_array['callback'])) {
+            $menu_item_data_array = call_user_func($menu_item_data_array['callback'], $menu_item_data_array);
+        }
+
         $title = self::extract_title($routename, $menu_item_data_array);
         $href = self::extract_href($routename, $menu_item_data_array);
         $is_active = self::is_active($routename, $menu_item_data_array);

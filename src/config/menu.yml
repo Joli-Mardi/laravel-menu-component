@@ -41,6 +41,13 @@
 #      title: {Title}
 #      href: {url}
 #
+#
+#
+#  -- Callback pour preprocess le title ou autre --#
+#  {routename_inutile}:
+#      title: {Title}
+#      callback: maFonction   ->   avec function maFonction($menu_item_data_array)
+#
 
 
 quisommesnous:
