@@ -31,8 +31,8 @@ class Menu extends Component {
         if (count($items) > 0) {
             $menuArray = $items;
 
-        // Sinon on tente de charger le yaml
-        } else{
+            // Sinon on tente de charger le yaml
+        } else {
 
             $yamlFilename = empty($name) ? '../config/menu.yml' : "../config/menu-$name.yml";
 
@@ -46,6 +46,7 @@ class Menu extends Component {
             $this->menu_links[] = self::create_menu_link_form_array($routename, $menu_item_data, $level);
         }
     }
+
 
     /**
      * Get the view / contents that represent the component.
@@ -62,7 +63,7 @@ class Menu extends Component {
 
     public static function create_menu_link_form_array(string $routename, string|array $menu_item_data_array, int $level = 0): MenuLink {
 
-        if(isset($menu_item_data_array['callback']) && is_callable($menu_item_data_array['callback'])) {
+        if (isset($menu_item_data_array['callback']) && is_callable($menu_item_data_array['callback'])) {
             $menu_item_data_array = call_user_func($menu_item_data_array['callback'], $menu_item_data_array);
         }
 
@@ -71,8 +72,10 @@ class Menu extends Component {
         $is_active = self::is_active($routename, $menu_item_data_array);
         $submenu_html = self::get_submenu_html($routename, $menu_item_data_array);
         $icon = self::extract_icon($routename, $menu_item_data_array);
+        $classes_array = self::extract_classes($routename, $menu_item_data_array);
 
         $menu_link = new MenuLink($href, $title);
+        $menu_link->classes_array = $classes_array;
         $menu_link->active = $is_active;
         $menu_link->level = $level;
         $menu_link->submenu_html = $submenu_html;
@@ -83,6 +86,7 @@ class Menu extends Component {
         return $menu_link;
     }
 
+
     public static function extract_href(string $routename, string|array $menu_item_data_array): string {
         if (isset($menu_item_data_array['href'])) {
             return $menu_item_data_array['href'];
@@ -92,6 +96,7 @@ class Menu extends Component {
         }
         throw new \ErrorException('MenuLink : $routename "' . $routename . '" not existing');
     }
+
 
     public static function extract_title(string $routename, string|array $menu_item_data_array): string {
         if (is_string($menu_item_data_array)) {
@@ -104,12 +109,27 @@ class Menu extends Component {
         }
     }
 
+
     public static function extract_icon(string $routename, string|array $menu_item_data_array): string {
         if (isset($menu_item_data_array['icon'])) {
             return $menu_item_data_array['icon'];
         }
         return '';
     }
+
+
+    public static function extract_classes(string $routename, string|array $menu_item_data_array): array {
+        if (isset($menu_item_data_array['class'])) {
+            if (is_array($menu_item_data_array['class'])) {
+                return $menu_item_data_array['class'];
+            }
+            if (is_string($menu_item_data_array['class'])) {
+                return [$menu_item_data_array['class']];
+            }
+        }
+        return [];
+    }
+
 
     public static function is_active(string $routename, string|array $menu_item_data_array): bool {
 
@@ -135,6 +155,7 @@ class Menu extends Component {
 
         return false;
     }
+
 
     public static function get_submenu_html(string $routename, string|array $menu_item_data_array, $current_menu_level = 0): string {
         if (isset($menu_item_data_array['submenu'])) {
@@ -165,13 +186,15 @@ class MenuLink extends Component {
     public string $submenu_html = '';
     public int $level = 0;
     public string $classes = '';
-    public array $classes_array = [];
+
 
     public function __construct(
         public string $href,
         public string $title,
         public bool   $active = false,
+        public array  $classes_array = [],
     ) {}
+
 
     public function render(): View|Closure|string {
 

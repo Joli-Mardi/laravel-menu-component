@@ -48,6 +48,18 @@
 #      title: {Title}
 #      callback: maFonction   ->   avec function maFonction($menu_item_data_array)
 #
+#
+#
+#
+#  -- Custom class --#
+#  {routename_inutile}:
+#      title: {Title}
+#      class: classe-unique
+#           # ou #
+#      class:
+#        - classe-unique
+#        - deuxieme-classe-unique
+#
 
 
 quisommesnous:
