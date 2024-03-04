@@ -72,6 +72,7 @@ class Menu extends Component {
         $is_active = self::is_active($routename, $menu_item_data_array);
         $submenu_html = self::get_submenu_html($routename, $menu_item_data_array);
         $icon = self::extract_icon($routename, $menu_item_data_array);
+        $icon_before = self::extract_icon_before($routename, $menu_item_data_array);
         $classes_array = self::extract_classes($routename, $menu_item_data_array);
 
         $menu_link = new MenuLink($href, $title);
@@ -81,6 +82,9 @@ class Menu extends Component {
         $menu_link->submenu_html = $submenu_html;
         if (!empty($icon)) {
             $menu_link->icon = $icon;
+        }
+        if (!empty($icon_before)) {
+            $menu_link->icon_before = $icon_before;
         }
 
         return $menu_link;
@@ -113,6 +117,14 @@ class Menu extends Component {
     public static function extract_icon(string $routename, string|array $menu_item_data_array): string {
         if (isset($menu_item_data_array['icon'])) {
             return $menu_item_data_array['icon'];
+        }
+        return '';
+    }
+
+
+    public static function extract_icon_before(string $routename, string|array $menu_item_data_array): string {
+        if (isset($menu_item_data_array['icon-before'])) {
+            return $menu_item_data_array['icon-before'];
         }
         return '';
     }
@@ -181,7 +193,9 @@ class Menu extends Component {
 class MenuLink extends Component {
 
     public bool $has_icon = false;
+    public bool $has_icon_before = false;
     public string $icon = '';
+    public string $icon_before = '';
     public bool $has_submenu = false;
     public string $submenu_html = '';
     public int $level = 0;
@@ -207,6 +221,10 @@ class MenuLink extends Component {
         if (!empty($this->icon)) {
             $this->has_icon = true;
             $this->classes_array[] = 'has-icon';
+        }
+        if (!empty($this->icon_before)) {
+            $this->has_icon_before = true;
+            $this->classes_array[] = 'has-icon icon-before';
         }
         if (!empty($this->submenu_html)) {
             $this->classes_array[] = 'has-submenu';

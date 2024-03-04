@@ -35,6 +35,7 @@
 #  {routename}:
 #      title: {Title}
 #      icon: {icon}   #@svg($icon) -> voir Blade UI
+#      icon-before: {icon_name}  -> sera placée avant le label de l'item du menu
 #
 #  -- Lien externe --#
 #  {routename_inutile}:
